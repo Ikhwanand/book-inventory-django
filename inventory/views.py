@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from .models import Book, Author, Category
 from .forms import BookForm
 from django.contrib.auth.decorators import login_required
@@ -54,4 +54,4 @@ def book_delete(request, pk):
         book.delete()
         messages.success(request, 'Book deleted successfully!')
         return redirect('inventory:book_list')
-    return render(request, 'inventory/book_confirm_delete.html', {'book': book})
+    return redirect('inventory:book_list')
